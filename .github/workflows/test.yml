@@ -6,16 +6,16 @@ on:
   pull_request:
 
 jobs:
-  test-check:
-    name: runner / woke (github-check)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check
-          level: info
+  # test-check:
+  #   name: runner / woke (github-check)
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: ./
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         reporter: github-check
+  #         level: info
 
   test-pr-check:
     if: github.event_name == 'pull_request'
@@ -27,18 +27,19 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
-          level: warning
-          workdir: ./testdata/subdir/
+          # level: warning
+          fail-on-error: true
+          # workdir: ./testdata/subdir/
 
-  test-pr-review:
-    if: github.event_name == 'pull_request'
-    name: runner / woke (github-pr-review)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          level: error
-          reviewdog-flags: -filter-mode=file -fail-on-error
+  # test-pr-review:
+  #   if: github.event_name == 'pull_request'
+  #   name: runner / woke (github-pr-review)
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: ./
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         reporter: github-pr-review
+  #         level: error
+  #         reviewdog-flags: -filter-mode=file -fail-on-error
