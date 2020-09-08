@@ -17,6 +17,7 @@ echo '::endgroup::'
 
 
 echo '::group:: Running woke with reviewdog 🐶 ...'
+set -x
 woke --output simple ${INPUT_WOKE_ARGS} \
   | reviewdog -efm="%f:%l:%c: %m" \
       -name="woke" \
@@ -25,4 +26,5 @@ woke --output simple ${INPUT_WOKE_ARGS} \
       -fail-on-error="${INPUT_FAIL_ON_ERROR:-false}" \
       -level="${INPUT_LEVEL}" \
       ${INPUT_REVIEWDOG_FLAGS}
+set +x
 echo '::endgroup::'
