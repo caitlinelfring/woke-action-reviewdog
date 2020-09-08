@@ -28,7 +28,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
           # level: warning
-          fail-on-error: true
+          # fail-on-error: true
           # workdir: ./testdata/subdir/
 
   # test-pr-review:
